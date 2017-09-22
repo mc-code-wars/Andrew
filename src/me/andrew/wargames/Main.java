@@ -2,7 +2,10 @@ package me.andrew.wargames;
 
 import me.andrew.wargames.currencys.CurrencyType;
 import me.andrew.wargames.events.JoinEvent;
+import me.andrew.wargames.events.VillagerClickEvent;
+import me.andrew.wargames.manager.ConfigManager;
 import me.andrew.wargames.manager.PlayerManager;
+import me.andrew.wargames.manager.ShopManager;
 import me.andrew.wargames.manager.SpawnerManager;
 import me.andrew.wargames.objects.GamePlayer;
 import org.bukkit.command.Command;
@@ -24,7 +27,16 @@ public class Main extends JavaPlugin{
     public void onEnable() {
         instance = this;
         registerEvents(new JoinEvent());
+        registerEvents(new VillagerClickEvent());
+        ShopManager.getInstance().removeShops();
+        ConfigManager.getInstance().getConfig("playershop.yml");
     }
+
+    @Override
+    public void onDisable() {
+        ShopManager.getInstance().removeShops();
+    }
+
     private void registerEvents(Listener list){
         getServer().getPluginManager().registerEvents(list,this);
     }
@@ -35,6 +47,7 @@ public class Main extends JavaPlugin{
         if(label.equalsIgnoreCase("setup")){
             sender.sendMessage("Setup starting!");
             SpawnerManager.getInstance().setupSpawners();
+            ShopManager.getInstance().spawnShops();
         }
         if(label.equalsIgnoreCase("playerinfo")){
             if(!(sender instanceof Player)){

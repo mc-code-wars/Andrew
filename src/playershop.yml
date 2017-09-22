@@ -1,0 +1,27 @@
+#########[WarGames]##########
+# Player shop configuration #
+# Valid Currencys:          #
+#   - IRON                  #
+#   - DIAMOND               #
+#   - EMERALD               #
+#############################
+
+start:
+  name: &cPlayer Shop
+  items:
+    '0':
+      name: "Blocks"
+      item: WOOL
+      amount: 32
+      open: blocks
+blocks:
+  name: &cBlocks
+  items:
+    '0':
+      name: "32 Wool"
+      item: WOOL
+      amount: 32
+      cost:
+        IRON: 5
+      open: close
+      action: buy

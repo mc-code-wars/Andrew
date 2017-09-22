@@ -1,0 +1,6 @@
+player:
+  npc_name: "&cPlayer shop"
+  spawn_block: WHITE_SHULKER_BOX
+team:
+  npc_name: "&cTeam Upgrades"
+  spawn_block: SILVER_SHULKER_BOX
