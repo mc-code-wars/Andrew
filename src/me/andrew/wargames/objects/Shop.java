@@ -45,6 +45,7 @@ public class Shop {
                 v.setCanPickupItems(false);
                 v.setCollidable(false);
                 v.setInvulnerable(true);
+                v.setSilent(true);
             }
         },20l);
     }

@@ -28,6 +28,6 @@ public class CurrencyHandler {
     }
     public boolean canAfford(GamePlayer gameplayer, CurrencyType type, int amt){
         InventoryHandle invHandle = new InventoryHandle();
-        return gameplayer.getCurrency(type) >= invHandle.getAmount(gameplayer,currencyItem(type),(short) -1);
+        return(gameplayer.getCurrency(type) >= amt);
     }
 }

@@ -7,21 +7,23 @@
 #############################
 
 start:
-  name: &cPlayer Shop
+  name: "&cPlayer Shop"
   items:
     '0':
-      name: "Blocks"
+      name: "&cBlocks"
       item: WOOL
+      data: 0
       amount: 32
+      action: OPEN
       open: blocks
 blocks:
-  name: &cBlocks
+  name: "&cBlocks"
   items:
     '0':
       name: "32 Wool"
       item: WOOL
+      data: 2
       amount: 32
       cost:
         IRON: 5
-      open: close
-      action: buy
+      action: BUY
