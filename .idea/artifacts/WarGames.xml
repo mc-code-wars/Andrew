@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="WarGames">
+    <output-path>$PROJECT_DIR$/out/artifacts/WarGames</output-path>
+    <root id="archive" name="WarGames.jar">
+      <element id="module-output" name="War minigame - CodeWars" />
+    </root>
+  </artifact>
+</component>

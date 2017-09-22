@@ -1,0 +1,7 @@
+name: WarGames
+version: 1.0.0
+description: Yhh
+main: me.andrew.wargames.Main
+commands:
+  setup:
+  playerinfo:
