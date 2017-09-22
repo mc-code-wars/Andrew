@@ -1,5 +1,6 @@
 package me.andrew.wargames.objects;
 
+import me.andrew.wargames.manager.ConfigManager;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -22,6 +23,7 @@ public class Spawner {
         block = b;
         spawnLoc = block.getLocation().add(0,5,0);
         level = lvl;
+
     }
 
     public void spawnItem(){

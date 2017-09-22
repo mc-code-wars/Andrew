@@ -14,13 +14,17 @@ public class Config {
     private FileConfiguration fileConfig;
     private Main main;
 
+    private String name;
+    private String path;
+    private File file;
+
     public Config(String fileName){
         this(Main.getInstance().getDataFolder().getPath(), fileName);
     }
 
-    public Config(String path, String fileName) {
+    public Config(String _path, String fileName) {
         main = Main.getInstance();
-        File file = new File(path, fileName);
+        File _file = new File(_path, fileName);
         if (!file.exists()) {
             file.getParentFile().mkdirs();
             main.saveResource(fileName, false);
@@ -34,6 +38,13 @@ public class Config {
         fileConfig = filesConfig;
     }
 
+    public void saveConfig(){
+        try {
+            fileConfig.save(new File(path, name));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public FileConfiguration getConfig(){
         return fileConfig;
     }
