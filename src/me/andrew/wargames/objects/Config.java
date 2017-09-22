@@ -24,7 +24,10 @@ public class Config {
 
     public Config(String _path, String fileName) {
         main = Main.getInstance();
+        name = fileName;
+        path = _path;
         File _file = new File(_path, fileName);
+        file = _file;
         if (!file.exists()) {
             file.getParentFile().mkdirs();
             main.saveResource(fileName, false);
@@ -40,7 +43,7 @@ public class Config {
 
     public void saveConfig(){
         try {
-            fileConfig.save(new File(path, name));
+            fileConfig.save(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
