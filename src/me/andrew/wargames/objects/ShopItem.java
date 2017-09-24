@@ -1,5 +1,6 @@
 package me.andrew.wargames.objects;
 
+import me.andrew.wargames.currencys.CurrencyHandler;
 import me.andrew.wargames.currencys.CurrencyType;
 import me.andrew.wargames.manager.MenuManager;
 import me.andrew.wargames.misc.ButtonAction;
@@ -9,6 +10,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -29,10 +31,10 @@ public class ShopItem {
         name = ChatColor.translateAlternateColorCodes('&',_name);
         im.setDisplayName(name);
         _is.setDurability(data);
-        _is.setItemMeta(im);
-        is = _is;
+
         ba = ButtonAction.valueOf(_cs.getString("action"));
         cs = _cs;
+
         if(ba == ButtonAction.OPEN){
             toOpen = _cs.getString("open");
         }else if(ba == ButtonAction.BUY){
@@ -42,12 +44,31 @@ public class ShopItem {
                 cost.put(ct,val);
             }
         }
+        im.setLore(getLore());
+        _is.setItemMeta(im);
+        is = _is;
     }
     public ItemStack getItem(){
         return is;
     }
     public String getName(){
         return name;
+    }
+    public ArrayList<String> getLore(){
+        ArrayList<String> lore = new ArrayList<String>();
+
+        if(ba == ButtonAction.OPEN){
+            lore.add(ChatColor.translateAlternateColorCodes('&',"&cClick here to open"));
+            lore.add(ChatColor.translateAlternateColorCodes('&',"&c"+toOpen));
+        }else if(ba == ButtonAction.BUY){
+            lore.add(ChatColor.translateAlternateColorCodes('&',"&cClick here to buy"));
+            for(CurrencyType ct : cost.keySet()){
+                lore.add(ChatColor.translateAlternateColorCodes('&',"&c"+ct.toString()+": "+ cost.get(ct)));
+
+            }
+        }
+
+        return lore;
     }
     public void runAction(GamePlayer gp){
         if(ba == ButtonAction.OPEN){
