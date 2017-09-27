@@ -7,7 +7,6 @@ import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Villager;
 
 import java.util.HashMap;
 
@@ -34,6 +33,10 @@ public void removeShops(){
         s.getVillager().remove();
     }
 }
+
+    public void clear() {
+        shopMapping.clear();
+    }
     public void spawnShops(){
      //removeShops();
         Main main = Main.getInstance();
@@ -64,12 +67,12 @@ public void removeShops(){
                         }
                     }
                 }
-                main.getServer().broadcastMessage("There are "+ amount + "  Shop found");
+                new ChatManager().sendDebug("There are " + amount + "  Shop found");
             }
         });
         for(Shop s : shopMapping.keySet()){
             s.spawnShop();
-            Main.getInstance().getServer().broadcastMessage("Spawned!!!");
+            new ChatManager().sendDebug("Spawned!!!");
         }
     }
 }

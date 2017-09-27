@@ -49,7 +49,6 @@ public class GamePlayer {
                if(item.getAmount() < left){
                    player.getInventory().remove(item);
                    left = left - item.getAmount();
-
                }
                if(item.getAmount() == left){
                    player.getInventory().remove(item);

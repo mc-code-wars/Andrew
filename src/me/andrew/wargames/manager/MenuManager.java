@@ -3,11 +3,7 @@ package me.andrew.wargames.manager;
 import me.andrew.wargames.Main;
 import me.andrew.wargames.misc.ShopType;
 import me.andrew.wargames.objects.MenuInventory;
-import org.bukkit.Chunk;
-import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +36,10 @@ private HashMap<String, MenuInventory> menuMapping;
         }
         return status;
     }
+
+    public void clear() {
+        menuMapping.clear();
+    }
     public MenuInventory getMenu2(String invName){
         MenuInventory status = null;
         for(String s : menuMapping.keySet()){
@@ -60,11 +60,11 @@ private HashMap<String, MenuInventory> menuMapping;
                 ArrayList<String> temp = new ArrayList<String>();
                 temp.add("start");
                 for(String s : conf.getKeys(false)){
-                    main.getServer().broadcastMessage("Made: "+s);
+                    new ChatManager().sendDebug("Made: " + s);
                     MenuManager.getInstance().addMenu(s,new MenuInventory(s, ShopType.PLAYER));
                     amount++;
                 }
-                main.getServer().broadcastMessage("There are "+ amount + "  Shop inventroys found");
+                new ChatManager().sendDebug("There are " + amount + "  Shop inventroys found");
             }
         });
     }

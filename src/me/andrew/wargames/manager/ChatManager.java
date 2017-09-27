@@ -30,6 +30,13 @@ public class ChatManager {
         p.sendMessage(prefix + cc(config.getString(mt.toString().toLowerCase())));
     }
 
+    public void sendMessage(Player p, String mt) {
+        p.sendMessage(prefix + cc(mt));
+    }
+
+    public void sendMessage(CommandSender p, String mt) {
+        p.sendMessage(prefix + cc(mt));
+    }
     public String cc(String txt) {
         return ChatColor.translateAlternateColorCodes('&', txt);
     }
@@ -40,6 +47,11 @@ public class ChatManager {
         }
     }
 
+    public void sendDebug(String str) {
+        if (Main.getInstance().isDebug) {
+            Main.getInstance().getServer().broadcastMessage(prefix + cc("&c[debug] " + str));
+        }
+    }
     public void sendDebug(CommandSender p, String str) {
         if (Main.getInstance().isDebug) {
             p.sendMessage(prefix + cc("&c[debug] " + str));

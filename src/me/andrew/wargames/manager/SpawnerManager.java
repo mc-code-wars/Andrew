@@ -3,7 +3,6 @@ package me.andrew.wargames.manager;
 import me.andrew.wargames.Main;
 import me.andrew.wargames.objects.Spawner;
 import org.bukkit.Chunk;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 
@@ -20,12 +19,15 @@ public class SpawnerManager {
         return ourInstance;
     }
     private ArrayList<Spawner> activeSpawners;
-private boolean CanRun;
+    public boolean CanRun;
     private SpawnerManager() {
         activeSpawners = new ArrayList<Spawner>();
         CanRun = true;
     }
 
+    public void clear() {
+        activeSpawners.clear();
+    }
     public void addSpawner(Spawner spawner){
         activeSpawners.add(spawner);
     }
@@ -35,7 +37,7 @@ private boolean CanRun;
 
     public void setupSpawners(){
         if(!CanRun){
-            Main.getInstance().getServer().broadcastMessage("Andrew Has blocked running this more then once");
+            new ChatManager().sendDebug("Andrew Has blocked running this more then once");
             return;
         }
         CanRun = false;
@@ -69,7 +71,7 @@ private boolean CanRun;
                         }
                     }
                 }
-                main.getServer().broadcastMessage("There are "+ amount + "  Spawners found");
+                new ChatManager().sendDebug("There are " + amount + "  Spawners found");
         }
         });
 
@@ -83,5 +85,11 @@ private boolean CanRun;
                 }
             }
         },100l,100l);
+    }
+
+    public void shutdownSpawners() {
+        for (Spawner spawner : getSpawners()) {
+            spawner.removeHolograms();
+        }
     }
 }

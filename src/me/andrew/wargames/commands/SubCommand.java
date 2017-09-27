@@ -14,4 +14,5 @@ public class SubCommand {
     public String getDescription() {
         return "A wargames subcommand";
     }
+
 }

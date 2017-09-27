@@ -1,16 +1,14 @@
 package me.andrew.wargames;
 
 import me.andrew.wargames.commands.CommandCaller;
-import me.andrew.wargames.currencys.CurrencyType;
 import me.andrew.wargames.events.BlockPlaceHandler;
 import me.andrew.wargames.events.InventoryClickEventHandler;
 import me.andrew.wargames.events.JoinEvent;
 import me.andrew.wargames.events.VillagerClickEvent;
-import me.andrew.wargames.manager.*;
-import me.andrew.wargames.objects.GamePlayer;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
+import me.andrew.wargames.manager.ConfigManager;
+import me.andrew.wargames.manager.MenuManager;
+import me.andrew.wargames.manager.ShopManager;
+import me.andrew.wargames.manager.SpawnerManager;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -42,35 +40,10 @@ public class Main extends JavaPlugin{
     @Override
     public void onDisable() {
         ShopManager.getInstance().removeShops();
+        SpawnerManager.getInstance().shutdownSpawners();
     }
 
     private void registerEvents(Listener list){
         getServer().getPluginManager().registerEvents(list,this);
-    }
-
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        if(label.equalsIgnoreCase("setup")){
-            sender.sendMessage("Setup starting!");
-            SpawnerManager.getInstance().setupSpawners();
-            ShopManager.getInstance().spawnShops();
-            MenuManager.getInstance().setup();
-        }
-        if(label.equalsIgnoreCase("playerinfo")){
-            if(!(sender instanceof Player)){
-                sender.sendMessage("Nope");
-                return true;
-            }
-            sender.sendMessage("Grabbing data");
-            Player p = (Player) sender;
-            GamePlayer gp = PlayerManager.getInstance().getGamePlayer(p);
-            sender.sendMessage("You Have");
-
-            for(CurrencyType c : CurrencyType.values()){
-                p.sendMessage(c.name()+": "+gp.getCurrency(c));
-            }
-        }
-        return true;
     }
 }

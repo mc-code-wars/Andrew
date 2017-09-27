@@ -26,6 +26,8 @@ public class CommandCaller implements CommandExecutor {
         commandMapping.put("help", new HelpCommand());
         commandMapping.put("test", new TestCommand());
         commandMapping.put("reload", new ReloadCommand());
+        commandMapping.put("setup", new SetupCommand());
+        commandMapping.put("reset", new ResetCommand());
     }
 
     @Override
@@ -56,7 +58,7 @@ public class CommandCaller implements CommandExecutor {
         String str = "&3--[&bWarGames&3]--" + System.lineSeparator();
         for (String cmdName : commandMapping.keySet()) {
             SubCommand sub = commandMapping.get(cmdName);
-            str += cmdName + " | " + sub.getDescription() + System.lineSeparator();
+            str += "/wargames " + cmdName + " | " + sub.getDescription() + System.lineSeparator();
         }
         return str;
     }
