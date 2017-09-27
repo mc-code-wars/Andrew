@@ -4,7 +4,8 @@ import me.andrew.wargames.Main;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 
 // ------------------------------
 // Copyright (c) PiggyPiglet 2017
@@ -41,6 +42,18 @@ public class Config {
         fileConfig = filesConfig;
     }
 
+    public boolean reloadConfig() {
+        boolean status = true;
+        fileConfig = new YamlConfiguration();
+        try {
+            fileConfig.load(file);
+        } catch (Exception e) {
+            status = false;
+            e.printStackTrace();
+        }
+        saveConfig();
+        return status;
+    }
     public void saveConfig(){
         try {
             fileConfig.save(file);

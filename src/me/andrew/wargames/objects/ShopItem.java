@@ -1,9 +1,10 @@
 package me.andrew.wargames.objects;
 
-import me.andrew.wargames.currencys.CurrencyHandler;
 import me.andrew.wargames.currencys.CurrencyType;
+import me.andrew.wargames.manager.ChatManager;
 import me.andrew.wargames.manager.MenuManager;
 import me.andrew.wargames.misc.ButtonAction;
+import me.andrew.wargames.misc.MessageType;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -81,7 +82,7 @@ public class ShopItem {
                 canAfford = gp.canAfford(ct, cost.get(ct));
             }
             if(!canAfford){
-                gp.getPlayer().sendMessage("Cant Afford");
+                new ChatManager().sendMessage(gp.getPlayer(), MessageType.NOT_ENOUGH);
                 return;
             }
 
@@ -92,6 +93,7 @@ public class ShopItem {
             ItemStack newIs = new ItemStack(getItem().getType(), getItem().getAmount());
             newIs.setDurability(getItem().getDurability());
             gp.getPlayer().getInventory().addItem(newIs);
+            new ChatManager().sendMessage(gp.getPlayer(), MessageType.ITEM_BOUGHT);
         }
     }
 }

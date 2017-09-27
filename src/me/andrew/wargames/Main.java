@@ -1,6 +1,8 @@
 package me.andrew.wargames;
 
+import me.andrew.wargames.commands.CommandCaller;
 import me.andrew.wargames.currencys.CurrencyType;
+import me.andrew.wargames.events.BlockPlaceHandler;
 import me.andrew.wargames.events.InventoryClickEventHandler;
 import me.andrew.wargames.events.JoinEvent;
 import me.andrew.wargames.events.VillagerClickEvent;
@@ -21,15 +23,20 @@ public class Main extends JavaPlugin{
         return instance;
     }
 
+    public boolean isDebug;
     @Override
     public void onEnable() {
         instance = this;
         registerEvents(new JoinEvent());
         registerEvents(new VillagerClickEvent());
         registerEvents(new InventoryClickEventHandler());
+        registerEvents(new BlockPlaceHandler());
+        getCommand("wargames").setExecutor(new CommandCaller());
         ShopManager.getInstance().removeShops();
         MenuManager.getInstance();
         ConfigManager.getInstance().getConfig("playershop.yml");
+        ConfigManager.getInstance().getConfig("playershop.yml");
+        isDebug = true;
     }
 
     @Override

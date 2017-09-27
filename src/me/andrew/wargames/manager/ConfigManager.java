@@ -26,4 +26,16 @@ public class ConfigManager {
         return configMapping.get(name).getConfig();
     }
 
+    public boolean reloadAll() {
+        Boolean status = true;
+        for (Config conf : configMapping.values()) {
+            boolean tmp = conf.reloadConfig();
+            if (tmp == false) {
+                status = false;
+            }
+        }
+        return status;
+    }
+
+
 }

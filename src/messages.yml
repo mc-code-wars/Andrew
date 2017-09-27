@@ -1,0 +1,6 @@
+prefix: "&7[&3WarGames&7] "
+access_denied: "&cYou dont have access to do this."
+not_enough: "&cYou dont have enough to buy this."
+item_bought: "&aYou have just bought %item%"
+reload_done: "&aReloaded"
+reload_error: "&cThere was a error reloading"

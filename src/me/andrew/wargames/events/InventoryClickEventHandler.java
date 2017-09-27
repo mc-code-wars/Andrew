@@ -17,16 +17,18 @@ public class InventoryClickEventHandler implements Listener {
     @EventHandler
     public void onInventroyClick(InventoryClickEvent e){
 
+        //we need to make sure that the inventory that was clicked was one of ours
         if(MenuManager.getInstance().isMenu(e.getClickedInventory().getName())){
-            e.setCancelled(true);
-            MenuInventory mi = MenuManager.getInstance().getMenu2(e.getClickedInventory().getName());
-            ShopItem si = mi.getShopItem(e.getCurrentItem().getItemMeta().getDisplayName());
-si.runAction(PlayerManager.getInstance().getGamePlayer((Player) e.getWhoClicked()));
+            //Gr8! Its ours (well ofc coz we rule)
+            e.setCancelled(true);  //Cancel the event (no block stealing)
+            MenuInventory mi = MenuManager.getInstance().getMenu2(e.getClickedInventory().getName()); //Get the Menu from the inventory
+            ShopItem si = mi.getShopItem(e.getCurrentItem().getItemMeta().getDisplayName()); //Get the Shop item from the Menu
+            si.runAction(PlayerManager.getInstance().getGamePlayer((Player) e.getWhoClicked())); //Run the Action on the player
         }
     }
 
     @EventHandler
-    public void onInventroyDrag(InventoryMoveItemEvent e){
+    public void onInventroyMove(InventoryMoveItemEvent e) {
         if(MenuManager.getInstance().isMenu( e.getDestination().getName())){
             e.setCancelled(true);
         }

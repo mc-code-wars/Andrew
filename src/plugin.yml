@@ -5,3 +5,4 @@ main: me.andrew.wargames.Main
 commands:
   setup:
   playerinfo:
+  wargames:
