@@ -1,10 +1,7 @@
 package me.andrew.wargames;
 
 import me.andrew.wargames.commands.CommandCaller;
-import me.andrew.wargames.events.BlockPlaceHandler;
-import me.andrew.wargames.events.InventoryClickEventHandler;
-import me.andrew.wargames.events.JoinEvent;
-import me.andrew.wargames.events.VillagerClickEvent;
+import me.andrew.wargames.events.GameEventHandler;
 import me.andrew.wargames.manager.ConfigManager;
 import me.andrew.wargames.manager.MenuManager;
 import me.andrew.wargames.manager.ShopManager;
@@ -25,16 +22,13 @@ public class Main extends JavaPlugin{
     @Override
     public void onEnable() {
         instance = this;
-        registerEvents(new JoinEvent());
-        registerEvents(new VillagerClickEvent());
-        registerEvents(new InventoryClickEventHandler());
-        registerEvents(new BlockPlaceHandler());
         getCommand("wargames").setExecutor(new CommandCaller());
         ShopManager.getInstance().removeShops();
         MenuManager.getInstance();
         ConfigManager.getInstance().getConfig("playershop.yml");
         ConfigManager.getInstance().getConfig("playershop.yml");
         isDebug = true;
+        new GameEventHandler().setupListeners();
     }
 
     @Override
@@ -43,7 +37,7 @@ public class Main extends JavaPlugin{
         SpawnerManager.getInstance().shutdownSpawners();
     }
 
-    private void registerEvents(Listener list){
+    public void registerEvents(Listener list) {
         getServer().getPluginManager().registerEvents(list,this);
     }
 }

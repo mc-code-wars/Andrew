@@ -54,6 +54,13 @@ public class CommandCaller implements CommandExecutor {
         return false;
     }
 
+    public ArrayList<String> getCommands() {
+        ArrayList<String> cmdsArr = new ArrayList<>();
+        for (String s : commandMapping.keySet()) {
+            cmdsArr.add(s);
+        }
+        return cmdsArr;
+    }
     public String makeHelp() {
         String str = "&3--[&bWarGames&3]--" + System.lineSeparator();
         for (String cmdName : commandMapping.keySet()) {

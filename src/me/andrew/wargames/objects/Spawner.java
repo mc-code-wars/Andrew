@@ -103,4 +103,9 @@ public class Spawner {
         level++;
         ExtraData.setCustomName(txtColor + "Level: " + level);
     }
+
+    public void upgrade(int i) {
+        level = +i;
+        ExtraData.setCustomName(txtColor + "Level: " + level);
+    }
 }
